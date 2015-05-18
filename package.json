@@ -28,5 +28,9 @@
   "homepage": "https://github.com/danigb/tonality",
   "devDependencies": {
     "vows": "^0.8.1"
+  },
+  "dependencies": {
+    "intervalo": "^0.4.0",
+    "note-pitch": "^0.1.1"
   }
 }
