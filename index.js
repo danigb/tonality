@@ -2,6 +2,7 @@
 
 var pitch = require('note-pitch');
 var intervalo = require('intervalo');
+var achord = require('achord');
 
 var Tonality = function(note, name) {
   if (!(this instanceof Tonality)) return new Tonality(note, name);
@@ -13,20 +14,31 @@ var Tonality = function(note, name) {
 
 Tonality.scales = { major: ["P1","M2","M3","P4","P5","M6","M7"] };
 
-Tonality.prototype.scale = function(grade) {
-  return pitch.transpose(this.note, rotate(this.scaleDef, grade - 1));
+Tonality.prototype.scale = function(grade, opts) {
+  var intervals = rotate(this.scaleDef, grade - 1);
+  return pitch.transpose(this.note, intervals);
 }
 
-Tonality.prototype.chord = function(grade, numberOfThirds) {
+Tonality.prototype.chord = function(grade, opts) {
+  opts = opts || {};
+  opts.thirds = opts.thirds || 4;
+  opts.intervals = opts.intervals || false;
+
   var scale = rotate(this.scaleDef, grade - 1);
-  if(numberOfThirds > 4) {
+  if(opts.thirds > 4) {
     scale = scale.concat(scale.map(octave));
   }
   var thirds = scale.filter(function(e, index) {
-    return index % 2 == 0 && index < numberOfThirds * 2;
+    return index % 2 == 0 && index < opts.thirds * 2;
   });
-  return pitch.transpose(this.note, thirds);
+  return opts.intervals ? thirds : pitch.transpose(this.note, thirds);
 }
+
+var GRADES = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII'];
+Tonality.prototype.chordName = function (grade) {
+  var intervals = this.chord(grade, { intervals: true });
+  return GRADES[grade - 1] + achord(intervals);
+};
 
 function rotate(intervals, num) {
   var top = intervals.slice(0, num).map(octave);

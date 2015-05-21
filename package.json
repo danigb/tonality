@@ -30,6 +30,7 @@
     "vows": "^0.8.1"
   },
   "dependencies": {
+    "achord": "^0.1.0",
     "intervalo": "^0.4.0",
     "note-pitch": "^0.1.1"
   }
