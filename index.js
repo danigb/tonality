@@ -1,7 +1,7 @@
 'use strict';
 
 var pitch = require('note-pitch');
-var intervalo = require('intervalo');
+var Interval = require('interval-parser');
 var achord = require('achord');
 
 var Tonality = function(note, name) {
@@ -22,7 +22,6 @@ Tonality.prototype.scale = function(grade, opts) {
 Tonality.prototype.chord = function(grade, opts) {
   opts = opts || {};
   opts.thirds = opts.thirds || 4;
-  opts.intervals = opts.intervals || false;
 
   if (grade > this.scaleDef.length) {
     throw Error("Invalid grade: " + grade)
@@ -35,12 +34,14 @@ Tonality.prototype.chord = function(grade, opts) {
   var thirds = scale.filter(function(e, index) {
     return index % 2 == 0 && index < opts.thirds * 2;
   });
-  return opts.intervals ? thirds : pitch.transpose(this.note, thirds);
+  return pitch.transpose(this.note, thirds);
 }
 
 var GRADES = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII'];
 Tonality.prototype.chordName = function (grade) {
-  var intervals = this.chord(grade, { intervals: true });
+  var root = this.scale(grade)[0];
+  var chord = this.chord(grade);
+  var intervals = pitch.distance(root, chord);
   return GRADES[grade - 1] + achord(intervals);
 };
 
@@ -50,8 +51,8 @@ function rotate(intervals, num) {
 }
 
 function octave(i) {
-  i = intervalo(i);
-  return i.number(i.number() + 7).toString();
+  i = Interval(i);
+  return i.quality + (i.number + 7);
 }
 
 

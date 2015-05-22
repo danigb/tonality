@@ -32,6 +32,12 @@ vows.describe('Tonality').addBatch({
     "chord thirds": function(tonality) {
       assert.equal(tonality.chordName(1), "IMaj7");
       assert.equal(tonality.chordName(2), "IIm7");
+      assert.equal(tonality.chordName(3), "IIIm7");
+      assert.equal(tonality.chordName(4), "IVMaj7");
+      assert.equal(tonality.chordName(5), "V7");
+      assert.equal(tonality.chordName(6), "VIm7");
+      assert.equal(tonality.chordName(7), "VII7b5");
+      assert.throws(function() { tonality.chordName(8) }, Error);
     }
   }
 }).export(module);

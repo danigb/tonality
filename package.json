@@ -31,8 +31,7 @@
   },
   "dependencies": {
     "achord": "^0.1.0",
-    "intervalo": "^0.4.0",
-    "note-pitch": "^0.1.1",
-    "teoria": "^1.9.0"
+    "interval-parser": "^0.7.0",
+    "note-pitch": "^0.3.0"
   }
 }
