@@ -5,7 +5,7 @@ Tonality = require('../');
 
 vows.describe('Tonality').addBatch({
   "major": {
-    topic: new Tonality('a', 'major'),
+    topic: new Tonality('a2', 'major'),
 
     "scales": function(tonality) {
       assert.deepEqual(tonality.scale(1), "a2 b2 c#3 d3 e3 f#3 g#3".split(' '));
@@ -19,7 +19,7 @@ vows.describe('Tonality').addBatch({
       assert.deepEqual(tonality.chord(5), ['e3', 'g#3', 'b3', 'd4']);
       assert.deepEqual(tonality.chord(6), ['f#3', 'a3', 'c#4', 'e4']);
       assert.deepEqual(tonality.chord(7), ['g#3', 'b3', 'd4', 'f#4']);
-      assert.deepEqual(tonality.chord(8), ['a2', 'c#3', 'e3', 'g#3']);
+      assert.throws(function() { tonality.chord(8) }, Error);
     },
     "chords lengths": function(tonality) {
       assert.deepEqual(tonality.chord(1), "a2 c#3 e3 g#3".split(' '));

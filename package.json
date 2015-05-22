@@ -32,6 +32,7 @@
   "dependencies": {
     "achord": "^0.1.0",
     "intervalo": "^0.4.0",
-    "note-pitch": "^0.1.1"
+    "note-pitch": "^0.1.1",
+    "teoria": "^1.9.0"
   }
 }

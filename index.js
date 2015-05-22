@@ -24,7 +24,11 @@ Tonality.prototype.chord = function(grade, opts) {
   opts.thirds = opts.thirds || 4;
   opts.intervals = opts.intervals || false;
 
+  if (grade > this.scaleDef.length) {
+    throw Error("Invalid grade: " + grade)
+  }
   var scale = rotate(this.scaleDef, grade - 1);
+
   if(opts.thirds > 4) {
     scale = scale.concat(scale.map(octave));
   }
