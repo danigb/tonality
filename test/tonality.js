@@ -23,13 +23,13 @@ vows.describe('Tonality').addBatch({
     },
     "chords lengths": function(tonality) {
       assert.deepEqual(tonality.chord(1), "a2 c#3 e3 g#3".split(' '));
-      assert.deepEqual(tonality.chord(1, {thirds: 3}), "a2 c#3 e3".split(' '));
-      assert.deepEqual(tonality.chord(1, { thirds: 4 }), "a2 c#3 e3 g#3".split(' '));
-      assert.deepEqual(tonality.chord(1, { thirds: 5 }), "a2 c#3 e3 g#3 b3".split(' '));
-      assert.deepEqual(tonality.chord(1, { thirds: 6 }), "a2 c#3 e3 g#3 b3 d4".split(' '));
-      assert.deepEqual(tonality.chord(1, { thirds: 7 }), "a2 c#3 e3 g#3 b3 d4 f#4".split(' '));
+      assert.deepEqual(tonality.chord(1, { notes: 3}), "a2 c#3 e3".split(' '));
+      assert.deepEqual(tonality.chord(1, { notes: 4 }), "a2 c#3 e3 g#3".split(' '));
+      assert.deepEqual(tonality.chord(1, { notes: 5 }), "a2 c#3 e3 g#3 b3".split(' '));
+      assert.deepEqual(tonality.chord(1, { notes: 6 }), "a2 c#3 e3 g#3 b3 d4".split(' '));
+      assert.deepEqual(tonality.chord(1, { notes: 7 }), "a2 c#3 e3 g#3 b3 d4 f#4".split(' '));
     },
-    "chord thirds": function(tonality) {
+    "chord names": function(tonality) {
       assert.equal(tonality.chordName(1), "IMaj7");
       assert.equal(tonality.chordName(2), "IIm7");
       assert.equal(tonality.chordName(3), "IIIm7");
